@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TaskFlow | AI-Powered Task Management</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+   
+<div class="app">
+<aside class="sidebar">
+  <div class="brand">Task<span>Flow</span> ✦</div>
+  <nav class="nav">
+    <div class="nav-label">WORKSPACE</div>
+    <button class="active" data-view="all"><span class="ico">▦</span>Dashboard</button>
+    
+    <button data-view="today"><span class="ico">◷</span>Due today</button>
+    <button data-view="completed"><span class="ico">✓</span>Completed</button>
+    <div class="nav-label">PERSONAL</div>
+    <button data-view="high"><span class="ico">⚑</span>High priority</button>
+   
+  </nav>
+  <div class="side-bottom"><strong>✦ Make progress, daily</strong>Break big goals into smaller steps with AI-assisted planning.</div>
+</aside>
+<main>
+  <header class="topbar">
+    <div class="greeting"><h1 id="greeting">Hello !👋</h1><p>Here's what's happening with your tasks today.</p></div>
+    <div class="top-actions"><div class="date-chip" id="todayDate"></div><button class="primary" id="newTaskBtn">＋ New task</button></div>
+  </header>
+  <section class="stats">
+    <div class="stat"><div class="stat-head">Total tasks <span class="stat-icon">☷</span></div><strong id="totalCount">0</strong><small>Tasks in your workspace</small></div>
+    <div class="stat"><div class="stat-head">In progress <span class="stat-icon">◷</span></div><strong id="progressCount">0</strong><small>Work currently underway</small></div>
+    <div class="stat"><div class="stat-head">Completed <span class="stat-icon">✓</span></div><strong id="completedCount">0</strong><small>Keep up the momentum</small></div>
+    <div class="stat"><div class="stat-head">Overdue <span class="stat-icon">!</span></div><strong id="overdueCount">0</strong><small>Tasks past their deadline</small></div>
+  </section>
+  <div class="layout">
+    <section>
+      <div class="panel">
+        <div class="panel-title"><div><h2 id="listHeading">My tasks</h2><p>Organize your day, one task at a time.</p></div><button class="secondary" id="clearFilters">Reset filters</button></div>
+        <div class="filters"><input id="searchInput" placeholder="⌕  Search tasks..."><select id="statusFilter"><option value="">All statuses</option><option>Pending</option><option>In Progress</option><option>Completed</option></select><select id="priorityFilter"><option value="">All priorities</option><option>High</option><option>Medium</option><option>Low</option></select></div>
+        <div class="task-list" id="taskList"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-title"><div><h2>AI subtask assistant</h2><p>Turn a big task into manageable steps.</p></div></div>
+        <div class="ai-card"><div class="ai-title"><span class="spark">✦</span> Plan smarter with AI</div><p>Enter a task and get AI-generated subtask suggestions powered by Gemini.</p><textarea id="aiTask" placeholder="e.g. Prepare for my semester exams"></textarea><div style="display:flex;justify-content:flex-end;margin-top:10px"><button class="primary" id="suggestBtn">✦ Suggest subtasks</button></div><div id="aiOutput"></div></div>
+      </div>
+    </section>
+    <aside>
+      <div class="panel"><div class="panel-title"><div><h2>Weekly progress</h2><p>A quick look at your productivity.</p></div></div><div class="progress-row"><div class="progress-label"><span>Tasks completed</span><span id="completionText">0%</span></div><div class="bar"><span id="completionBar" style="width:0%"></span></div></div><div class="progress-row"><div class="progress-label"><span>Tasks in progress</span><span id="inProgressText">0%</span></div><div class="bar"><span id="inProgressBar" style="width:0%"></span></div></div><div class="progress-row"><div class="progress-label"><span>Tasks pending</span><span id="pendingText">0%</span></div><div class="bar"><span id="pendingBar" style="width:0%"></span></div></div></div>
+      <div class="panel"><div class="panel-title"><div><h2>Upcoming deadlines</h2><p>Keep an eye on what's next.</p></div></div><div id="deadlineList"></div></div>
+      <div class="panel"><div class="panel-title"><div><h2>Quick tip</h2><span>💡</span></div></div><p style="font-size:13px;color:var(--muted);line-height:1.7;margin:0">Try setting a clear deadline and priority for each task. Use the AI assistant to break larger tasks into smaller steps you can complete one by one.</p></div>
+    </aside>
+  </div>
+</main>
+</div>
+<div class="modal-backdrop" id="taskModal">
+  <form class="modal" id="taskForm">
+    <h2 id="modalTitle">Create a task</h2><p>Add the details and keep your work organized.</p>
+    <input type="hidden" id="editId">
+    <div class="field"><label for="taskTitle">Task title *</label><input id="taskTitle" required maxlength="120" placeholder="What do you need to do?"></div>
+    <div class="field"><label for="taskDescription">Description (optional)</label><textarea id="taskDescription" placeholder="Add a few details..."></textarea></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="field"><label for="taskPriority">Priority</label><select id="taskPriority"><option>Medium</option><option>High</option><option>Low</option></select></div><div class="field"><label for="taskStatus">Status</label><select id="taskStatus"><option>Pending</option><option>In Progress</option><option>Completed</option></select></div></div>
+    <div class="field"><label for="taskDeadline">Deadline (optional)</label><input id="taskDeadline" type="date"></div>
+    <div class="form-actions"><button type="button" class="cancel" id="cancelModal">Cancel</button><button class="primary" type="submit">Save task</button></div>
+  </form>
+</div>
+<div class="toast" id="toast"></div>
+<script src="script.js" defer></script>
+
+</body>
+</html>
